@@ -9,13 +9,28 @@
 <body>
 
 <form name="login" method="POST" action="login.do">
+<input type="hidden" value="login" name="action"/>
+<h1>Welcome to Login Demo</h1>
 <p>Instructions:</p>
 <p>Username should be atleast 6 characters long</p>
 <p>Password must be atleast 8 characters long</p>
 <br />
-Enter username: <input type="text" name="username" />
-<br />
-Enter password: <input type="password" name="password" />
+<h3>
+Enter login credentials below</h3>
+<table>
+<tr>
+<td>
+Enter username: 
+</td>
+<td>
+<input type="text" name="username" />
+</td>
+</tr>
+<tr>
+<td>Enter password: </td>
+<td><input type="password" name="password" /></td>
+</tr>
+</table>
 <br />
 <input type="submit" value="Submit" />
 </form>

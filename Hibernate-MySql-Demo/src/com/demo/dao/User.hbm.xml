@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 27, 2016 10:38:01 AM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="com.demo.dao.User" table="USERS">
+		<id name="id" type="int">
+			<column name="ID" />
+			<generator class="increment" />
+		</id>
+		<property name="name" type="java.lang.String">
+			<column name="NAME" />
+		</property>
+		
+		<one-to-one name="proteinData" class="com.demo.dao.ProteinData" cascade="save-update"></one-to-one>
+		<!-- Using ProteinData as value type -->
+		<!-- <component name="proteinData">
+			<property name="total" type="int">
+				<column name="TOTAL" />
+			</property>
+			<property name="goal" type="int">
+				<column name="GOAL" />
+			</property>
+		</component> -->
+
+		<!-- When using User history as entity type relationship Also create a 
+			.hbm.xml file for UserHistory -->
+		<list name="history" table="USER_HISTORY" inverse="true" cascade="save-update">
+			<key column="USER_ID"></key>
+
+			<list-index column="POSITION"></list-index>
+			<one-to-many class="com.demo.dao.UserHistory" />
+		</list>
+
+
+		<!-- When using User history as value type relationship Do not create a 
+			.hbm.xml file for UserHistory -->
+		<!-- <list name="history" table="USER_HISTORY"> <key column="USER_ID"></key> 
+			<list-index column="POSITION"></list-index> <composite-element class="com.demo.dao.UserHistory"> 
+			<property name="entryTime" type="date" column="ENTRY_TIME"></property> <property 
+			name="entry" type="string" column="ENTRY"></property> </composite-element> 
+			</list> -->
+	</class>
+</hibernate-mapping>
