@@ -1,7 +1,7 @@
 package com.demo.dao;
 
 public class User {
-	
+
 	private int userId;
 	private String username;
 	private String password;
@@ -23,8 +23,8 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	
+
+
+
 
 }
