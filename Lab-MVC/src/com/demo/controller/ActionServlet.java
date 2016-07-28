@@ -1,6 +1,7 @@
 package com.demo.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -33,17 +34,30 @@ public class ActionServlet extends HttpServlet{
 				req.setAttribute("username", username);
 				req.setAttribute("msg", "success");
 				Cookie myCookie =  new Cookie("user-id", Integer.toString(userId));
-				UserDetailBean userDetail = service.getUserDetails(userId);
-				req.setAttribute("data", userDetail);
-				//List<UserDetailBean> users = service.getUsersList();
+				List<UserDetailBean> users;
+				if(username.contains("admin")){
+					users = service.getUsersList();
+				}
+				else{					
+					UserDetailBean userDetail = service.getUserDetails(userId);
+					users = new ArrayList<UserDetailBean>();
+					users.add(userDetail);
+				}
+				req.setAttribute("data", users);
+				//req.setAttribute("data", userDetail);
+				
+				//For day-9
+				
 				//req.setAttribute("data", users);
 				resp.addCookie(myCookie);
+				req.getRequestDispatcher("response.jsp").forward(req, resp);
 			}	
 			else{
 				req.setAttribute("msg", "failure");
+				req.getRequestDispatcher("index.jsp").forward(req, resp);
 			}
 
-			req.getRequestDispatcher("response.jsp").forward(req, resp);
+			
 
 		}
 		else if("logout".equalsIgnoreCase(action)){

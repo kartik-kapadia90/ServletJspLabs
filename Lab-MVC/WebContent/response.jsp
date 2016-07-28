@@ -39,14 +39,16 @@
 					<th>Quantity</th>
 					<th>Price</th>
 				</tr>
-				<tr>
+				<%-- <tr>
+				//for day 8
 					<td><c:out value="${data.name}" /></td>
 					<td><c:out value="${data.date}" /></td>
 					<td><c:out value="${data.description}" /></td>
 					<td><c:out value="${data.quantity}" /></td>
 					<td><c:out value="${data.price}" /></td>
-				</tr>
-				<%-- <c:forEach items="${data}" var="user">
+				</tr> --%>
+				<!-- For day 9, below -->
+				<c:forEach items="${data}" var="user">
 						<tr>
 						<td>
 						<c:out value="${user.name}"/>
@@ -64,7 +66,7 @@
 						<c:out value="${user.price}"/>
 						</td>
 						 </tr>
-					 </c:forEach> --%>
+					 </c:forEach> 
 			</table>
 		</c:if>
 
