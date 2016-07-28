@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 27, 2016 4:22:15 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="com.demo.dao.User" table="USER">
+		<id name="userId" type="int">
+			<column name="USER_ID" />
+			<generator class="increment" />
+		</id>
+		<property name="username" type="java.lang.String">
+			<column name="USERNAME" />
+		</property>
+		<property name="password" type="java.lang.String">
+			<column name="PASSWORD" />
+		</property>
+		
+		<one-to-one name="userDetail" class="com.demo.dao.UserDetailBean" cascade="save-update"></one-to-one>
+		
+	</class>
+</hibernate-mapping>

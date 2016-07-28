@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,8 +13,8 @@ import com.demo.dao.UserDetailBean;
 import com.demo.model.UserService;
 
 public class ActionServlet extends HttpServlet{
-	
-	
+
+
 	/**
 	 * 
 	 */
@@ -21,16 +22,50 @@ public class ActionServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException{
-		
-		UserService service = new UserService();
-		List<UserDetailBean> users = service.getUsersList();
-		req.setAttribute("data", users);
-		req.getRequestDispatcher("response.jsp").forward(req, resp);
+		String action = req.getParameter("action");
+		if("login".equalsIgnoreCase(action)){
+
+			String username = (String) req.getParameter("username");
+			String password = (String) req.getParameter("password");
+			UserService service = new UserService();
+			int userId=service.getUserId(username, password);
+			if(userId>0){
+				req.setAttribute("username", username);
+				req.setAttribute("msg", "success");
+				Cookie myCookie =  new Cookie("user-id", Integer.toString(userId));
+				UserDetailBean userDetail = service.getUserDetails(userId);
+				req.setAttribute("data", userDetail);
+				//List<UserDetailBean> users = service.getUsersList();
+				//req.setAttribute("data", users);
+				resp.addCookie(myCookie);
+			}	
+			else{
+				req.setAttribute("msg", "failure");
+			}
+
+			req.getRequestDispatcher("response.jsp").forward(req, resp);
+
+		}
+		else if("logout".equalsIgnoreCase(action)){
+			doLogout(req, resp);
+		}
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException{
 		doGet(req,resp);
+	}
+
+	public void doLogout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		Cookie[] cookies = request.getCookies();
+		for (Cookie cookie : cookies) {
+			cookie.setMaxAge(0);
+			cookie.setValue(null);
+			cookie.setPath("/");
+			response.addCookie(cookie);
+		}
+
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 }

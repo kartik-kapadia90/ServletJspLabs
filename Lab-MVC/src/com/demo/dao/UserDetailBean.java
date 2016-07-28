@@ -1,23 +1,24 @@
 package com.demo.dao;
 
+import java.util.Date;
+
 public class UserDetailBean {
 	
+	private int id;
 	private String name;
-	private String date;
+	private Date date;
 	private String description;
 	private int quantity;
 	private double price;
+	private User user;
+	
+	
+	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
 	}
 	public String getDescription() {
 		return description;
@@ -36,6 +37,24 @@ public class UserDetailBean {
 	}
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	

@@ -53,8 +53,6 @@ public class LoginServlet extends HttpServlet{
 				req.setAttribute("username", username);
 				req.setAttribute("msg", "success");
 				Cookie myCookie =  new Cookie("user-id", Integer.toString(user.getUserId()));
-
-
 				resp.addCookie(myCookie);
 			}
 			else{
