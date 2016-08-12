@@ -18,6 +18,7 @@ public class HibernateUtilities {
 			sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		}
 		catch(Exception e){
+			e.printStackTrace();
 			System.out.println("Problem creating session factory");
 		}
 

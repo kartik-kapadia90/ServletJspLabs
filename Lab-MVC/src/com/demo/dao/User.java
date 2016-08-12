@@ -1,16 +1,18 @@
 package com.demo.dao;
 
+import java.util.List;
+
 public class User {
 
 	private int userId;
 	private String username;
 	private String password;	
-	private UserDetailBean userDetail;
-	
-	public User(){
+	private List<UserDetailBean> userDetail;
+
+	/*public User(){
 		setUserDetail(new UserDetailBean());
-	}
-	
+	}*/
+
 	public int getUserId() {
 		return userId;
 	}
@@ -29,14 +31,21 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public UserDetailBean getUserDetail() {
+
+	public List<UserDetailBean> getUserDetail() {
 		return userDetail;
 	}
-	public void setUserDetail(UserDetailBean userDetail) {
+
+	public void setUserDetail(List<UserDetailBean> userDetail) {
 		this.userDetail = userDetail;
-		userDetail.setUser(this);
 	}
 
+
+	public void addUserDtl(UserDetailBean bean){
+
+		bean.setUser(this);
+		userDetail.add(bean);
+	}
 
 
 

@@ -71,12 +71,25 @@ public class UserService {
 	}
 	
 	
-	public UserDetailBean getUserDetails(int userId){
+	public List<UserDetailBean> getUserDetails(int userId){
 		
 		Session session = HibernateUtilities.getSessionFactory().openSession();
 		session.beginTransaction();
 		User loadedUser = (User)session.get(User.class,userId);
 		session.getTransaction().commit();
 		return loadedUser.getUserDetail();
+	}
+	
+	
+	public void addUserDetail(UserDetailBean bean, int userId){
+		Session session = HibernateUtilities.getSessionFactory().openSession();
+		session.beginTransaction();
+		User loadedUser = (User)session.get(User.class,userId);
+		bean.setUser(loadedUser);
+		loadedUser.addUserDtl(bean);
+		session.save(bean);
+		session.getTransaction().commit();
+		
+		
 	}
 }

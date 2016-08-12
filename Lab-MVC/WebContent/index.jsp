@@ -10,7 +10,7 @@
 	<p>Welcome to MVC Lab - Login Demo with Hibernate and MySql</p>
 
 	<form name="login" method="POST" action="login.do">
-		<input type="hidden" value="login" name="action" />
+		<input type="hidden" value="login" name="actionVal" />
 		<h1>Welcome to Login Demo</h1>
 		<p>Instructions:</p>
 		<p>Username should be atleast 6 characters long</p>

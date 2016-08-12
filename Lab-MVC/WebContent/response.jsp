@@ -10,6 +10,14 @@
 <script type="text/javascript">
 	function callMe() {
 		document.getElementById('myForm').action = "logout.do";
+		document.getElementById('actionVal').value = "logout";
+		document.getElementById('myForm').submit();
+	}
+	
+	function addData(){
+		
+		document.getElementById('myForm').action = "add.do";
+		document.getElementById('actionVal').value = "add";
 		document.getElementById('myForm').submit();
 	}
 </script>
@@ -24,7 +32,7 @@
 			Welcome,
 			<%=(String) request.getAttribute("username")%></h1>
 		<h4>You have successfully logged in!!</h4>
-		<input type="hidden" value="logout" name="action" /> <a
+		<input type="hidden" id="actionVal" name="actionVal" /> <a
 			href="javascript:callMe();">Please click here to logout!</a>
 
 
@@ -49,24 +57,14 @@
 				</tr> --%>
 				<!-- For day 9, below -->
 				<c:forEach items="${data}" var="user">
-						<tr>
-						<td>
-						<c:out value="${user.name}"/>
-						</td>
-						  <td>
-						<c:out value="${user.date}"/>
-						</td>
-						<td>
-						<c:out value="${user.description}"/>
-						</td>
-						<td>
-						<c:out value="${user.quantity}"/>
-						</td>
-						<td>
-						<c:out value="${user.price}"/>
-						</td>
-						 </tr>
-					 </c:forEach> 
+					<tr>
+						<td><c:out value="${user.name}" /></td>
+						<td><c:out value="${user.date}" /></td>
+						<td><c:out value="${user.description}" /></td>
+						<td><c:out value="${user.quantity}" /></td>
+						<td><c:out value="${user.price}" /></td>
+					</tr>
+				</c:forEach>
 			</table>
 		</c:if>
 
@@ -74,6 +72,27 @@
 			<p>There are no records to display</p>
 		</c:if>
 
+
+		<table>
+			<tr>
+				<td>Name</td>
+				<td><input type="text" name="name" /></td>
+			</tr>
+			<tr>
+				<td>Description</td>
+				<td><input type="text" name="desc" /></td>
+			</tr>
+			<tr>
+				<td>Quantity</td>
+				<td><input type="text" name="qty" /></td>
+			</tr>
+			<tr>
+				<td>Price</td>
+				<td><input type="text" name="price" /></td>
+			</tr>
+		</table>
+		<br />
+		<input type="submit" value="Add" onclick="addData()"/>
 
 	</form>
 	<%

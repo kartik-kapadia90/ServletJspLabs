@@ -15,7 +15,13 @@
 			<column name="PASSWORD" />
 		</property>
 		
-		<one-to-one name="userDetail" class="com.demo.dao.UserDetailBean" cascade="save-update"></one-to-one>
+		<!-- <one-to-one name="userDetail" class="com.demo.dao.UserDetailBean" cascade="save-update"></one-to-one> -->
+		
+		<list name="userDetail" table="USER_DTL" inverse="true" cascade="save-update">
+			<key column="USER_ID"></key>
+			<list-index column="ID"></list-index>
+			<one-to-many class="com.demo.dao.UserDetailBean" />
+		</list>
 		
 	</class>
 </hibernate-mapping>

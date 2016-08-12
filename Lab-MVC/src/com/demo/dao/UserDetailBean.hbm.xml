@@ -23,6 +23,10 @@
         <property name="price" type="double">
             <column name="PRICE" />
         </property>
-        <one-to-one name="user" class="com.demo.dao.User" constrained="true"></one-to-one>
+        <!-- <one-to-one name="user" class="com.demo.dao.User" constrained="true"></one-to-one> -->
+        
+        <many-to-one name="user" class="com.demo.dao.User" not-null="true">
+            <column name="USER_ID" />
+        </many-to-one>
     </class>
 </hibernate-mapping>

@@ -11,7 +11,7 @@ public class UserDetailBean {
 	private int quantity;
 	private double price;
 	private User user;
-	
+
 	
 	
 	public String getName() {
